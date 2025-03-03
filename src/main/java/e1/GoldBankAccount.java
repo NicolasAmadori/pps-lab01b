@@ -10,12 +10,12 @@ public class GoldBankAccount implements BankAccount{
 
     @Override
     public int getBalance() {
-        return 0;
+        return base.getBalance();
     }
 
     @Override
     public void deposit(int amount) {
-
+        base.deposit(amount);
     }
 
     @Override
