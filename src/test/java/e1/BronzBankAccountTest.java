@@ -10,4 +10,11 @@ public class BronzBankAccountTest{
         BankAccount account = new BronzBankAccount(new CoreBankAccount());
         assertEquals(0, account.getBalance());
     }
+
+    @Test
+    public void testCanDeposit() {
+        BankAccount account = new BronzBankAccount(new CoreBankAccount());
+        account.deposit(1000);
+        assertEquals(1000, account.getBalance());
+    }
 }

@@ -10,12 +10,12 @@ public class BronzBankAccount implements BankAccount {
 
     @Override
     public int getBalance() {
-        return 0;
+        return this.base.getBalance();
     }
 
     @Override
     public void deposit(int amount) {
-
+        this.base.deposit(amount);
     }
 
     @Override
