@@ -24,4 +24,11 @@ public class GoldBankAccountTest {
         account.deposit(1000);
         assertEquals(1000, this.account.getBalance());
     }
+
+    @Test
+    public void testCanWithdraw() {
+        this.account.deposit(1000);
+        this.account.withdraw(200);
+        assertEquals(800, this.account.getBalance());
+    }
 }

@@ -20,6 +20,6 @@ public class GoldBankAccount implements BankAccount{
 
     @Override
     public void withdraw(int amount) {
-
+        base.withdraw(amount);
     }
 }
