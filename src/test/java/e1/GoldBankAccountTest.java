@@ -3,7 +3,7 @@ package e1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GoldBankAccountTest {
 
@@ -30,5 +30,11 @@ public class GoldBankAccountTest {
         this.account.deposit(1000);
         this.account.withdraw(200);
         assertEquals(800, this.account.getBalance());
+    }
+
+    @Test
+    public void testWithdrawMoreThanAvailableButLessThanFiveHundred(){
+        this.account.deposit(1000);
+        assertDoesNotThrow(() -> this.account.withdraw(1500));
     }
 }
