@@ -37,4 +37,10 @@ public class GoldBankAccountTest {
         this.account.deposit(1000);
         assertDoesNotThrow(() -> this.account.withdraw(1500));
     }
+
+    @Test
+    public void testWithdrawMoreThanAvailableButMoreThanFiveHundred(){
+        this.account.deposit(1000);
+        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1501));
+    }
 }
