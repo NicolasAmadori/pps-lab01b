@@ -19,7 +19,7 @@ public class BronzBankAccountTest extends BankAccountTest{
     @Test
     public void testWithdrawMoreThanAvailable() {
         this.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1500));
+        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1001));
     }
 
     @Test
