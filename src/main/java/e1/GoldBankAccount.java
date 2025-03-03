@@ -2,6 +2,7 @@ package e1;
 
 public class GoldBankAccount implements BankAccount{
 
+    public static final int MIN_BALANCE = -500;
     private final CoreBankAccount base;
 
     public GoldBankAccount(CoreBankAccount base) {
@@ -20,7 +21,7 @@ public class GoldBankAccount implements BankAccount{
 
     @Override
     public void withdraw(int amount) {
-        if (this.getBalance() < amount - 500){
+        if (this.getBalance() - amount < MIN_BALANCE){
             throw new IllegalStateException();
         }
         base.withdraw(amount);
