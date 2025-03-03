@@ -23,5 +23,6 @@ public class BronzBankAccount implements BankAccount {
         if (this.getBalance() - amount < 0){
             throw new IllegalStateException();
         }
+        base.withdraw(amount);
     }
 }

@@ -21,4 +21,11 @@ public class BronzBankAccountTest extends BankAccountTest{
         this.account.deposit(1000);
         assertThrows(IllegalStateException.class, () -> this.account.withdraw(1500));
     }
+
+    @Test
+    public void testZeroFeeWithdrawal() {
+        this.account.deposit(1000);
+        this.account.withdraw(99);
+        assertEquals(901, this.account.getBalance());
+    }
 }
