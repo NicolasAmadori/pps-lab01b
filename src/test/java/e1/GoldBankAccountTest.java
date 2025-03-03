@@ -14,7 +14,7 @@ public class GoldBankAccountTest extends BankAccountTest{
     public void testCanWithdraw() {
         super.account.deposit(1000);
         super.account.withdraw(200);
-        assertEquals(800, this.account.getBalance());
+        assertEquals(800, super.account.getBalance());
     }
 
     @Test

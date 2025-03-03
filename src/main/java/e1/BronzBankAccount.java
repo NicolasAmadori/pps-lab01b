@@ -20,6 +20,8 @@ public class BronzBankAccount implements BankAccount {
 
     @Override
     public void withdraw(int amount) {
-
+        if (this.getBalance() - amount < 0){
+            throw new IllegalStateException();
+        }
     }
 }

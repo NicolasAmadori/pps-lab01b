@@ -13,15 +13,15 @@ public class SilverBankAccountTest extends BankAccountTest{
 
     @Test
     public void testCanWithdraw() {
-        this.account.deposit(1000);
-        this.account.withdraw(200);
-        assertEquals(799, this.account.getBalance());
+        super.account.deposit(1000);
+        super.account.withdraw(200);
+        assertEquals(799, super.account.getBalance());
     }
 
     @Test
     public void testCannotWithdrawMoreThanAvailable(){
-        this.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1000));
+        super.account.deposit(1000);
+        assertThrows(IllegalStateException.class, () -> super.account.withdraw(1000));
     }
 
 }
