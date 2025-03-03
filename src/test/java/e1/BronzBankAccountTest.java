@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BronzBankAccountTest extends BankAccountTest{
 
     BronzBankAccountTest() {
-        super(new BronzBankAccount(new CoreBankAccount()));
+        super(new BronzBankAccount(new FeeBankAccount((a) -> (a < 100) ? 0 : 1, new CoreBankAccount())));
     }
 
     @Test

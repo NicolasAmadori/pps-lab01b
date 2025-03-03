@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SilverBankAccountTest extends BankAccountTest{
 
     SilverBankAccountTest(){
-        super(new SilverBankAccount(new CoreBankAccount()));
+        super(new SilverBankAccount(new FeeBankAccount((a) -> 1, new CoreBankAccount())));
     }
 
     @Test
@@ -21,7 +21,7 @@ public class SilverBankAccountTest extends BankAccountTest{
     @Test
     public void testCannotWithdrawMoreThanAvailable(){
         super.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> super.account.withdraw(1000));
+        assertThrows(IllegalStateException.class, () -> super.account.withdraw(1200));
     }
 
 }

@@ -3,9 +3,9 @@ package e1;
 public class GoldBankAccount implements BankAccount{
 
     public static final int MIN_BALANCE = -500;
-    private final CoreBankAccount base;
+    private final BankAccount base;
 
-    public GoldBankAccount(CoreBankAccount base) {
+    public GoldBankAccount(BankAccount base) {
         this.base = base;
     }
 

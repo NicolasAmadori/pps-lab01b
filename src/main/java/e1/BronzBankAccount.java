@@ -2,9 +2,9 @@ package e1;
 
 public class BronzBankAccount implements BankAccount {
 
-    private final CoreBankAccount base;
+    private final BankAccount base;
 
-    public BronzBankAccount(CoreBankAccount base) {
+    public BronzBankAccount(BankAccount base) {
         this.base = base;
     }
 
@@ -20,10 +20,9 @@ public class BronzBankAccount implements BankAccount {
 
     @Override
     public void withdraw(int amount) {
-        int fee = (amount >= 100) ? 1: 0;
-        if (this.getBalance() - amount - fee < 0) {
+        if (this.getBalance() - amount < 0) {
             throw new IllegalStateException();
         }
-        base.withdraw(amount + fee);
+        base.withdraw(amount);
     }
 }
