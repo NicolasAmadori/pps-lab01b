@@ -36,7 +36,7 @@ public class SilverBankAccountTest {
     @Test
     public void testCannotWithdrawMoreThanAvailable(){
         this.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1200));
+        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1000));
     }
 
 }

@@ -20,7 +20,7 @@ public class SilverBankAccount implements BankAccount {
 
     @Override
     public void withdraw(int amount) {
-        if (this.getBalance() < amount){
+        if (this.getBalance() < amount + 1){
             throw new IllegalStateException();
         }
         base.withdraw(amount + 1);
