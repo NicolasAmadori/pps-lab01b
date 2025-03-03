@@ -28,4 +28,11 @@ public class BronzBankAccountTest extends BankAccountTest{
         this.account.withdraw(99);
         assertEquals(901, this.account.getBalance());
     }
+
+    @Test
+    public void testFeeWithdrawal() {
+        this.account.deposit(1000);
+        this.account.withdraw(100);
+        assertEquals(899, this.account.getBalance());
+    }
 }
