@@ -5,31 +5,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LogicTest {
 
+  public static final int SIZE = 5;
+  public static final int KNIGHT_NUMBER = 1;
+  public static final int PAWN_NUMBER = 1;
+  Logics logic;
+
+  @BeforeEach
+  public void beforeEach() {
+    logic = new LogicsImpl(SIZE);
+  }
+
   @Test
   public void testKnightInitialPosition() {
-    Logics logic = new LogicsImpl(5);
     int knightCounter = 0;
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
-        if(logic.hasKnight(i, j)) {
-          knightCounter++;
-        }
+        knightCounter += this.logic.hasKnight(i, j) ? 1 : 0;
       }
     }
-    assertEquals(1, knightCounter);
+    assertEquals(KNIGHT_NUMBER, knightCounter);
   }
 
   @Test
   public void testPawnInitialPosition() {
-    Logics logic = new LogicsImpl(5);
     int pawnCounter = 0;
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
-        if(logic.hasPawn(i, j)) {
-          pawnCounter++;
-        }
+        pawnCounter += this.logic.hasPawn(i, j) ? 1 : 0;
       }
     }
-    assertEquals(1, pawnCounter);
+    assertEquals(PAWN_NUMBER, pawnCounter);
   }
 }
