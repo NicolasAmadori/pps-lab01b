@@ -7,34 +7,32 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BronzBankAccountTest extends BankAccountTest{
 
     BronzBankAccountTest() {
-        super(new NegativeBalanceBankAccount(0,
-                new FeeBankAccount((a) -> (a < 100) ? 0 : 1,
-                        new CoreBankAccount())));
+        super(new BankAccountFactoryImpl().createBronzeBankAccount());
     }
 
     @Test
     public void testCanWithdraw() {
-        this.account.deposit(1000);
-        assertDoesNotThrow(() -> this.account.withdraw(200));
+        super.account.deposit(1000);
+        assertDoesNotThrow(() -> super.account.withdraw(200));
     }
 
     @Test
     public void testWithdrawMoreThanAvailable() {
-        this.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1001));
+        super.account.deposit(1000);
+        assertThrows(IllegalStateException.class, () -> super.account.withdraw(1001));
     }
 
     @Test
     public void testZeroFeeWithdrawal() {
-        this.account.deposit(1000);
-        this.account.withdraw(99);
-        assertEquals(901, this.account.getBalance());
+        super.account.deposit(1000);
+        super.account.withdraw(99);
+        assertEquals(901, super.account.getBalance());
     }
 
     @Test
     public void testFeeWithdrawal() {
-        this.account.deposit(1000);
-        this.account.withdraw(100);
-        assertEquals(899, this.account.getBalance());
+        super.account.deposit(1000);
+        super.account.withdraw(100);
+        assertEquals(899, super.account.getBalance());
     }
 }

@@ -8,9 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SilverBankAccountTest extends BankAccountTest{
 
     SilverBankAccountTest(){
-        super(new NegativeBalanceBankAccount(0,
-                new FeeBankAccount((a) -> 1,
-                        new CoreBankAccount())));
+        super(new BankAccountFactoryImpl().createSilverBankAccount());
     }
 
     @Test
