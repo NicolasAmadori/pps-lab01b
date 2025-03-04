@@ -8,6 +8,7 @@ public class LogicTest {
   public static final int SIZE = 5;
   public static final int KNIGHT_NUMBER = 1;
   public static final int PAWN_NUMBER = 1;
+  public static final int RANDOM_TEST_NUMBER = 10_000;
   Logics logic;
 
   @BeforeEach
@@ -39,7 +40,7 @@ public class LogicTest {
 
   @Test
   public void testPawnAndKnightInitialPosition() {
-    for(int c = 0; c < 10_000; c++ ){
+    for(int c = 0; c < RANDOM_TEST_NUMBER; c++ ){
       this.logic = new LogicsImpl(SIZE);
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
