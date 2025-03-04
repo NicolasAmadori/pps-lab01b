@@ -1,7 +1,7 @@
 package e2;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
 
@@ -35,5 +35,17 @@ public class LogicTest {
       }
     }
     assertEquals(PAWN_NUMBER, pawnCounter);
+  }
+
+  @Test
+  public void testPawnAndKnightInitialPosition() {
+    for(int c = 0; c < 10_000; c++ ){
+      this.logic = new LogicsImpl(SIZE);
+      for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+          assert !this.logic.hasPawn(i, j) || !this.logic.hasKnight(i, j);
+        }
+      }
+    }
   }
 }
