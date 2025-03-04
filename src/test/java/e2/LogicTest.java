@@ -61,4 +61,37 @@ public class LogicTest {
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(SIZE, SIZE))
     );
   }
+
+  @Test
+  public void testInvalidMove() {
+    Pair<Integer,Integer> knightPos = null;
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        if(this.logic.hasKnight(i, j)) {
+          knightPos = new Pair<>(i, j);
+        }
+      }
+    }
+
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        int x = i - knightPos.getX();
+        int y = j - knightPos.getY();
+        if (x==0 || y==0 || Math.abs(x)+Math.abs(y)!=3) {
+          assertFalse(this.logic.hit(i, j));
+          Pair<Integer,Integer> newknightPos = null;
+
+          for (int i2 = 0; i2 < 5; i2++) {
+            for (int j2 = 0; j2 < 5; j2++) {
+              if(this.logic.hasKnight(i2, j2)) {
+                newknightPos = new Pair<>(i2, j2);
+              }
+            }
+          }
+          assertEquals(knightPos, newknightPos);
+        }
+      }
+    }
+  }
+
 }
