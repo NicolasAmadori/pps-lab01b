@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BronzBankAccountTest extends BankAccountTest{
+public class BronzeBankAccountTest extends BankAccountTest{
 
-    BronzBankAccountTest() {
+    BronzeBankAccountTest() {
         super(new BankAccountFactoryImpl().createBronzeBankAccount());
     }
 
