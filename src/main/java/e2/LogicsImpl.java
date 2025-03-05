@@ -16,9 +16,9 @@ public class LogicsImpl implements Logics {
     }
 
 	public LogicsImpl(int size, Pair<Integer,Integer> pawnPosition, Pair<Integer,Integer> knightPosition){
-//		if(pawnPosition == knightPosition) {
-//			th
-//		}
+		if(pawnPosition.equals(knightPosition)) {
+			throw new IllegalArgumentException("Pawn and Knight positions cannot be the same");
+		}
 		this.size = size;
 		this.pawn = pawnPosition;
 		this.knight = knightPosition;

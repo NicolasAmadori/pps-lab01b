@@ -106,6 +106,12 @@ public class LogicTest {
     );
   }
 
+  @Test
+  public void TestFixedPositionConstructorWithSamePosition() {
+    Pair<Integer,Integer> validPawnPosition = new Pair<>(0,0);
+    assertThrows(IllegalArgumentException.class, () -> this.logic = new LogicsImpl(SIZE, validPawnPosition, validPawnPosition));
+  }
+
   private Pair<Integer,Integer> findPositionWithPredicate(BiPredicate<Integer, Integer> predicate) {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
