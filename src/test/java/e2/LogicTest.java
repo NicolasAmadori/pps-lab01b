@@ -87,6 +87,22 @@ public class LogicTest {
         }
       }
     }
+  }
 
+  @Test
+  public void testValidMoves() {
+    Pair<Integer,Integer> knightPos = findKnightPosition();
+
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        int x = i - knightPos.getX();
+        int y = j - knightPos.getY();
+        if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
+          this.logic.hit(i, j);
+          assertEquals(new Pair<>(i, j), findKnightPosition());
+          this.logic.hit(knightPos.getX(), knightPos.getY());
+        }
+      }
+    }
   }
 }
