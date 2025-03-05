@@ -62,6 +62,35 @@ public class LogicTest {
     );
   }
 
+  @Test
+  public void testInvalidMoves() {
+    Pair<Integer,Integer> knightPos = findKnightPosition();
+
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        if (!isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
+          assertFalse(this.logic.hit(i, j));
+          assertEquals(knightPos, findKnightPosition());
+        }
+      }
+    }
+  }
+
+  @Test
+  public void testValidMoves() {
+    Pair<Integer,Integer> knightPos = findKnightPosition();
+
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        if (isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
+          this.logic.hit(i, j);
+          assertEquals(new Pair<>(i, j), findKnightPosition());
+          this.logic.hit(knightPos.getX(), knightPos.getY());
+        }
+      }
+    }
+  }
+
   private Pair<Integer,Integer> findKnightPosition() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
@@ -77,34 +106,5 @@ public class LogicTest {
     int x = newX - startingX;
     int y = newY - startingY;
     return x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3;
-  }
-
-  @Test
-  public void testInvalidMoves() {
-    Pair<Integer,Integer> knightPos = findKnightPosition();
-
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j < 5; j++) {
-        if (!isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
-          assertFalse(this.logic.hit(i, j));
-          assertEquals(knightPos, findKnightPosition());
-        }
-      }
-    }
-  }
-
-  @Test
-  public void testValidMoves() {
-    Pair<Integer,Integer> knightPos = findKnightPosition();
-
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j < 5; j++) {
-        if (isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
-          this.logic.hit(i, j);
-          assertEquals(new Pair<>(i, j), findKnightPosition());
-          this.logic.hit(knightPos.getX(), knightPos.getY());
-        }
-      }
-    }
   }
 }
