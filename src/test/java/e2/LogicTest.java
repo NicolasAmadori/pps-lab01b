@@ -1,6 +1,9 @@
 package e2;
 import org.junit.jupiter.api.*;
 
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
@@ -64,13 +67,13 @@ public class LogicTest {
 
   @Test
   public void testInvalidMoves() {
-    Pair<Integer,Integer> knightPos = findKnightPosition();
+    Pair<Integer,Integer> knightPos = findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b));
 
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         if (!isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
           assertFalse(this.logic.hit(i, j));
-          assertEquals(knightPos, findKnightPosition());
+          assertEquals(knightPos, findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b)));
         }
       }
     }
@@ -78,13 +81,13 @@ public class LogicTest {
 
   @Test
   public void testValidMoves() {
-    Pair<Integer,Integer> knightPos = findKnightPosition();
+    Pair<Integer,Integer> knightPos = findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b));
 
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         if (isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
           this.logic.hit(i, j);
-          assertEquals(new Pair<>(i, j), findKnightPosition());
+          assertEquals(new Pair<>(i, j), findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b)));
           this.logic.hit(knightPos.getX(), knightPos.getY());
         }
       }
@@ -96,28 +99,17 @@ public class LogicTest {
     Pair<Integer,Integer> validPawnPosition = new Pair<>(0,0);
     Pair<Integer,Integer> validKnightPosition = new Pair<>(1, 1);
     this.logic = new LogicsImpl(SIZE, validPawnPosition, validKnightPosition);
-    Integer x = null;
-    Integer y = null;
-    for (int i = 0; i < 5 && x == null; i++) {
-      for (int j = 0; j < 5 && x == null; j++) {
-        if(this.logic.hasPawn(i, j)) {
-          x = i;
-          y = j;
-        }
-      }
-    }
-    Pair<Integer,Integer> foundPawnPosition = new Pair<>(x, y);
 
     assertAll(
-            () -> assertEquals(validPawnPosition, foundPawnPosition),
-            () -> assertEquals(validKnightPosition, findKnightPosition())
+            () -> assertEquals(validPawnPosition, findPositionWithPredicate((a,b) -> this.logic.hasPawn(a, b))),
+            () -> assertEquals(validKnightPosition, findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b)))
     );
   }
 
-  private Pair<Integer,Integer> findKnightPosition() {
+  private Pair<Integer,Integer> findPositionWithPredicate(BiPredicate<Integer, Integer> predicate) {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
-        if(this.logic.hasKnight(i, j)) {
+        if(predicate.test(i, j)) {
           return new Pair<>(i, j);
         }
       }
