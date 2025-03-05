@@ -73,15 +73,19 @@ public class LogicTest {
     return null;
   }
 
+  private boolean isPositionValid(int startingX, int startingY, int newX, int newY) {
+    int x = newX - startingX;
+    int y = newY - startingY;
+    return x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3;
+  }
+
   @Test
   public void testInvalidMoves() {
     Pair<Integer,Integer> knightPos = findKnightPosition();
 
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
-        int x = i - knightPos.getX();
-        int y = j - knightPos.getY();
-        if (x==0 || y==0 || Math.abs(x)+Math.abs(y)!=3) {
+        if (!isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
           assertFalse(this.logic.hit(i, j));
           assertEquals(knightPos, findKnightPosition());
         }
@@ -95,9 +99,7 @@ public class LogicTest {
 
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
-        int x = i - knightPos.getX();
-        int y = j - knightPos.getY();
-        if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
+        if (isPositionValid(knightPos.getX(), knightPos.getY(), i, j)) {
           this.logic.hit(i, j);
           assertEquals(new Pair<>(i, j), findKnightPosition());
           this.logic.hit(knightPos.getX(), knightPos.getY());
