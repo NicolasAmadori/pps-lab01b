@@ -22,11 +22,11 @@ public class LogicsImpl implements Logics {
 			throw new IllegalArgumentException("Pawn and Knight positions cannot be the same");
 		}
 
-		if (pawnPosition.getX()<0 || pawnPosition.getY()<0 || pawnPosition.getX() >= this.size || pawnPosition.getY() >= this.size) {
+		if (isPositionInValid(pawnPosition.getX(), pawnPosition.getY())) {
 			throw new IndexOutOfBoundsException("Invalid pawn position");
 		}
 
-		if (knightPosition.getX()<0 || knightPosition.getY()<0 || knightPosition.getX() >= this.size || knightPosition.getY() >= this.size) {
+		if (isPositionInValid(knightPosition.getX(), knightPosition.getY())) {
 			throw new IndexOutOfBoundsException("Invalid knight position");
 		}
 
@@ -42,7 +42,7 @@ public class LogicsImpl implements Logics {
     
 	@Override
 	public boolean hit(int row, int col) {
-		if (row<0 || col<0 || row >= this.size || col >= this.size) {
+		if (isPositionInValid(row, col)) {
 			throw new IndexOutOfBoundsException();
 		}
 		// Below a compact way to express allowed moves for the knight
@@ -63,5 +63,9 @@ public class LogicsImpl implements Logics {
 	@Override
 	public boolean hasPawn(int row, int col) {
 		return this.pawn.equals(new Pair<>(row,col));
+	}
+
+	private boolean isPositionInValid(int row, int col) {
+		return row<0 || col<0 || row >= this.size || col >= this.size;
 	}
 }
