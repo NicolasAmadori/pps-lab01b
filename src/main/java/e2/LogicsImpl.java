@@ -16,10 +16,20 @@ public class LogicsImpl implements Logics {
     }
 
 	public LogicsImpl(int size, Pair<Integer,Integer> pawnPosition, Pair<Integer,Integer> knightPosition){
+		this.size = size;
+
 		if(pawnPosition.equals(knightPosition)) {
 			throw new IllegalArgumentException("Pawn and Knight positions cannot be the same");
 		}
-		this.size = size;
+
+		if (pawnPosition.getX()<0 || pawnPosition.getY()<0 || pawnPosition.getX() >= this.size || pawnPosition.getY() >= this.size) {
+			throw new IndexOutOfBoundsException("Invalid pawn position");
+		}
+
+		if (knightPosition.getX()<0 || knightPosition.getY()<0 || knightPosition.getX() >= this.size || knightPosition.getY() >= this.size) {
+			throw new IndexOutOfBoundsException("Invalid knight position");
+		}
+
 		this.pawn = pawnPosition;
 		this.knight = knightPosition;
 	}

@@ -111,6 +111,19 @@ public class LogicTest {
     assertThrows(IllegalArgumentException.class, () -> this.logic = new LogicsImpl(SIZE, VALID_PAWN_POSITION, VALID_PAWN_POSITION));
   }
 
+  @Test
+  public void TestFixedPositionConstructorWithInvalidPosition() {
+
+    assertAll(
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(-1, 0), new Pair<>(0, 0))),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(0, 0), new Pair<>(-1, 0))),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(-1, 0), new Pair<>(0, -1))),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(SIZE, 0), new Pair<>(0, 0))),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(0, 0), new Pair<>(SIZE, 0))),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic = new LogicsImpl(SIZE, new Pair<>(SIZE, 0), new Pair<>(0, SIZE)))
+    );
+  }
+
   private Pair<Integer,Integer> findPositionWithPredicate(BiPredicate<Integer, Integer> predicate) {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
