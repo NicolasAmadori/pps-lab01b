@@ -12,6 +12,8 @@ public class LogicTest {
   public static final int KNIGHT_NUMBER = 1;
   public static final int PAWN_NUMBER = 1;
   public static final int RANDOM_TEST_NUMBER = 10_000;
+  public static final Pair<Integer, Integer> VALID_PAWN_POSITION = new Pair<>(0, 0);
+  public static final Pair<Integer, Integer> VALID_KNIGHT_POSITION = new Pair<>(1, 1);
   Logics logic;
 
   @BeforeEach
@@ -96,20 +98,17 @@ public class LogicTest {
 
   @Test
   public void TestFixedPositionConstructor() {
-    Pair<Integer,Integer> validPawnPosition = new Pair<>(0,0);
-    Pair<Integer,Integer> validKnightPosition = new Pair<>(1, 1);
-    this.logic = new LogicsImpl(SIZE, validPawnPosition, validKnightPosition);
+    this.logic = new LogicsImpl(SIZE, VALID_PAWN_POSITION, VALID_KNIGHT_POSITION);
 
     assertAll(
-            () -> assertEquals(validPawnPosition, findPositionWithPredicate((a,b) -> this.logic.hasPawn(a, b))),
-            () -> assertEquals(validKnightPosition, findPositionWithPredicate((a,b) -> this.logic.hasKnight(a, b)))
+            () -> assertEquals(VALID_PAWN_POSITION, findPositionWithPredicate((a,b) -> this.logic.hasPawn(a, b))),
+            () -> assertEquals(VALID_KNIGHT_POSITION, findPositionWithPredicate((a, b) -> this.logic.hasKnight(a, b)))
     );
   }
 
   @Test
   public void TestFixedPositionConstructorWithSamePosition() {
-    Pair<Integer,Integer> validPawnPosition = new Pair<>(0,0);
-    assertThrows(IllegalArgumentException.class, () -> this.logic = new LogicsImpl(SIZE, validPawnPosition, validPawnPosition));
+    assertThrows(IllegalArgumentException.class, () -> this.logic = new LogicsImpl(SIZE, VALID_PAWN_POSITION, VALID_PAWN_POSITION));
   }
 
   private Pair<Integer,Integer> findPositionWithPredicate(BiPredicate<Integer, Integer> predicate) {
