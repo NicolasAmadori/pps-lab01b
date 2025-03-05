@@ -56,7 +56,7 @@ public class LogicTest {
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(-1, 0)),
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(0, -1)),
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(-1, -1)),
-            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(SIZE, -1)),
+            () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(SIZE, 0)),
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(0, SIZE)),
             () -> assertThrows(IndexOutOfBoundsException.class, () -> this.logic.hit(SIZE, SIZE))
     );
