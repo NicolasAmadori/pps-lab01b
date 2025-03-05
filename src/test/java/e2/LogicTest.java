@@ -91,6 +91,29 @@ public class LogicTest {
     }
   }
 
+  @Test
+  public void TestFixedPositionConstructor() {
+    Pair<Integer,Integer> validPawnPosition = new Pair<>(0,0);
+    Pair<Integer,Integer> validKnightPosition = new Pair<>(1, 1);
+    this.logic = new LogicsImpl(SIZE, validPawnPosition, validKnightPosition);
+    Integer x = null;
+    Integer y = null;
+    for (int i = 0; i < 5 && x == null; i++) {
+      for (int j = 0; j < 5 && x == null; j++) {
+        if(this.logic.hasPawn(i, j)) {
+          x = i;
+          y = j;
+        }
+      }
+    }
+    Pair<Integer,Integer> foundPawnPosition = new Pair<>(x, y);
+
+    assertAll(
+            () -> assertEquals(validPawnPosition, foundPawnPosition),
+            () -> assertEquals(validKnightPosition, findKnightPosition())
+    );
+  }
+
   private Pair<Integer,Integer> findKnightPosition() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
